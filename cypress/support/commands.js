@@ -37,10 +37,14 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('getStoryElement', {}, () => {
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   return cy
     .get(`#storybook-preview-iframe`)
     .its('0.contentDocument.body')
     .should('not.be.empty')
     .then(cy.wrap)
-    .find('#root');
+    .find('#root')
+    .should('not.be.empty')
+    .then(cy.wrap)
+    .wait(50);
 });
