@@ -49,7 +49,7 @@ Cypress.Commands.add('getStoryElement', {}, () => {
         expect(element.querySelector('#root')).not.null;
       })
       .then(() => {
-        return element.querySelector('#root');
+        return cy.get('#root');
       });
   });
 });

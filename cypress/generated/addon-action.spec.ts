@@ -17,8 +17,7 @@ describe('addon-action', () => {
     cy.get('#button--with-some-emoji-and-action').should('have.class', 'selected');
 
     // check for content
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.getStoryElement().wait(1000).find('button').click();
+    cy.getStoryElement().find('button').click();
 
     // click on addon
     clickAddon('Actions');
