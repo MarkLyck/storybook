@@ -46,7 +46,7 @@ Cypress.Commands.add('getStoryElement', {}, () => {
       .get(iframe, { timeout: 20000 })
       .should(() => {
         expect(element).not.null;
-        expect(element.querySelector('#root')).not.null;
+        expect(cy.get('#root')).not.null;
       })
       .then(() => {
         return cy.get('#root');
