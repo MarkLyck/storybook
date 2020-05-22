@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-standalone-expect, no-unused-expressions, jest/valid-expect */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -38,18 +37,10 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('getStoryElement', {}, () => {
-  return cy.get(`#storybook-preview-iframe`).then({ timeout: 20000 }, (iframe) => {
-    const content = iframe[0].contentDocument;
-    const element = content !== null ? content.documentElement : null;
-
-    return cy
-      .get(iframe, { timeout: 20000 })
-      .should(() => {
-        expect(element).not.null;
-        expect(cy.get('#root')).not.null;
-      })
-      .then(() => {
-        return cy.get('#root');
-      });
-  });
+  return cy
+    .get(`#storybook-preview-iframe`)
+    .its('0.contentDocument.body')
+    .should('not.be.empty')
+    .then(cy.wrap)
+    .find('#root');
 });
